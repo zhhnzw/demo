@@ -31,7 +31,7 @@ func Login(c *gin.Context) {
 // @Tags 注销
 // @Accept application/json
 // @Produce application/json
-// @Param Authorization header string false "Bearer 用户令牌"
+// @Param Authorization header string false "用户令牌"
 // @Param object query mysql.User false "查询参数"
 // @Security ApiKeyAuth
 // @Success 200 {object} Resp
@@ -47,7 +47,7 @@ func Logout(c *gin.Context) {
 // @Tags 获取用户信息
 // @Accept application/json
 // @Produce application/json
-// @Param Authorization header string false "Bearer 用户令牌"
+// @Param Authorization header string false "用户令牌"
 // @Param object query mysql.User false "查询参数"
 // @Security ApiKeyAuth
 // @Success 200 {object} Resp
