@@ -1,6 +1,9 @@
 name: "demo"
 mode: "dev"
-port: 8081
+port: 8000
+alloworigins:
+- http://localhost:8000
+
 log:
   level: "debug"
   filename: "demo.log"
@@ -11,8 +14,8 @@ mysql:
   host: "127.0.0.1"
   port: 3306
   user: "root"
-  password: "root"
-  dbname: "test"
+  password: "z19930417"
+  db_name: "test"
   max_open_conns: 200
   max_idle_conns: 50
 redis:

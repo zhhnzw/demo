@@ -1,11 +1,16 @@
 package routes
 
 import (
+	"demo/controller/v1"
+	_ "demo/docs"
 	"demo/logger"
 	"demo/settings"
-	"net/http"
-
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	gs "github.com/swaggo/gin-swagger"
+	"github.com/swaggo/gin-swagger/swaggerFiles"
+	"log"
+	"net/http"
 )
 
 func Setup(mode string) *gin.Engine {
@@ -14,9 +19,16 @@ func Setup(mode string) *gin.Engine {
 	}
 	r := gin.New()
 	r.Use(logger.GinLogger(), logger.GinRecovery(true))
-
+	config := cors.DefaultConfig()
+	log.Println(settings.Conf.AllowOrigins)
+	config.AllowOrigins = settings.Conf.AllowOrigins
+	config.AllowCredentials = true
+	r.Use(cors.New(config))
+	r.GET("/swagger/*any", gs.WrapHandler(swaggerFiles.Handler))
 	r.GET("/version", func(c *gin.Context) {
 		c.String(http.StatusOK, settings.Conf.Version)
 	})
+	r.POST("/v1/login", v1.Login)
+	SetUserRouter(r)
 	return r
 }

@@ -11,10 +11,11 @@ import (
 var Conf = new(AppConfig)
 
 type AppConfig struct {
-	Name         string `mapstructure:"name"`
-	Mode         string `mapstructure:"mode"`
-	Version      string `mapstructure:"version"`
-	Port         int    `mapstructure:"port"`
+	Name         string   `mapstructure:"name"`
+	Mode         string   `mapstructure:"mode"`
+	Version      string   `mapstructure:"version"`
+	Port         int      `mapstructure:"port"`
+	AllowOrigins []string `mapstructure:"allowOrigins"`
 	*LogConfig   `mapstructure:"log"`
 	*MySQLConfig `mapstructure:"mysql"`
 	*RedisConfig `mapstructure:"redis"`
