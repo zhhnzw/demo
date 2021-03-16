@@ -17,7 +17,7 @@ type Resp struct {
 // @Tags 登录
 // @Accept application/json
 // @Produce application/json
-// @Param object query mysql.User false "查询参数"
+// @Param object body mysql.User false "post json参数"
 // @Success 200 {object} Resp
 // @Router /v1/login [post]
 func Login(c *gin.Context) {
@@ -32,7 +32,6 @@ func Login(c *gin.Context) {
 // @Accept application/json
 // @Produce application/json
 // @Param Authorization header string false "用户令牌"
-// @Param object query mysql.User false "查询参数"
 // @Security ApiKeyAuth
 // @Success 200 {object} Resp
 // @Router /v1/logout [post]
@@ -48,7 +47,7 @@ func Logout(c *gin.Context) {
 // @Accept application/json
 // @Produce application/json
 // @Param Authorization header string false "用户令牌"
-// @Param object query mysql.User false "查询参数"
+// @Param object query mysql.User false "get查询参数"
 // @Security ApiKeyAuth
 // @Success 200 {object} Resp
 // @Router /v1/user [get]

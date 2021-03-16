@@ -1,4 +1,11 @@
 definitions:
+  mysql.User:
+    properties:
+      password:
+        type: string
+      userName:
+        type: string
+    type: object
   v1.Resp:
     properties:
       code:
@@ -28,12 +35,11 @@ paths:
       - application/json
       description: 登录接口
       parameters:
-      - in: query
-        name: password
-        type: string
-      - in: query
-        name: userName
-        type: string
+      - description: post json参数
+        in: body
+        name: object
+        schema:
+          $ref: '#/definitions/mysql.User'
       produces:
       - application/json
       responses:
@@ -50,15 +56,9 @@ paths:
       - application/json
       description: 注销接口
       parameters:
-      - description: Bearer 用户令牌
+      - description: 用户令牌
         in: header
         name: Authorization
-        type: string
-      - in: query
-        name: password
-        type: string
-      - in: query
-        name: userName
         type: string
       produces:
       - application/json
@@ -78,7 +78,7 @@ paths:
       - application/json
       description: 获取用户信息接口
       parameters:
-      - description: Bearer 用户令牌
+      - description: 用户令牌
         in: header
         name: Authorization
         type: string

@@ -48,14 +48,12 @@ var doc = `{
                 "summary": "登录接口",
                 "parameters": [
                     {
-                        "type": "string",
-                        "name": "password",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "name": "userName",
-                        "in": "query"
+                        "description": "post json参数",
+                        "name": "object",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/mysql.User"
+                        }
                     }
                 ],
                 "responses": {
@@ -89,19 +87,9 @@ var doc = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Bearer 用户令牌",
+                        "description": "用户令牌",
                         "name": "Authorization",
                         "in": "header"
-                    },
-                    {
-                        "type": "string",
-                        "name": "password",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "name": "userName",
-                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -135,7 +123,7 @@ var doc = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Bearer 用户令牌",
+                        "description": "用户令牌",
                         "name": "Authorization",
                         "in": "header"
                     },
@@ -162,6 +150,17 @@ var doc = `{
         }
     },
     "definitions": {
+        "mysql.User": {
+            "type": "object",
+            "properties": {
+                "password": {
+                    "type": "string"
+                },
+                "userName": {
+                    "type": "string"
+                }
+            }
+        },
         "v1.Resp": {
             "type": "object",
             "properties": {
