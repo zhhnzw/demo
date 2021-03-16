@@ -9,7 +9,6 @@ import (
 	"github.com/gin-gonic/gin"
 	gs "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
-	"log"
 	"net/http"
 )
 
@@ -20,7 +19,6 @@ func Setup(mode string) *gin.Engine {
 	r := gin.New()
 	r.Use(logger.GinLogger(), logger.GinRecovery(true))
 	config := cors.DefaultConfig()
-	log.Println(settings.Conf.AllowOrigins)
 	config.AllowOrigins = settings.Conf.AllowOrigins
 	config.AllowCredentials = true
 	r.Use(cors.New(config))
