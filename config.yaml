@@ -1,6 +1,7 @@
 name: "demo"
 mode: "dev"
-port: 8000
+version: "v1.0"
+port: 8080
 alloworigins:
 - http://localhost:8000
 
