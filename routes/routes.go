@@ -6,6 +6,7 @@ import (
 	"demo/logger"
 	"demo/settings"
 	"github.com/gin-contrib/cors"
+	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 	gs "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
@@ -22,6 +23,7 @@ func Setup(mode string) *gin.Engine {
 	config.AllowOrigins = settings.Conf.AllowOrigins
 	config.AllowCredentials = true
 	r.Use(cors.New(config))
+	pprof.Register(r)
 	r.GET("/swagger/*any", gs.WrapHandler(swaggerFiles.Handler))
 	r.GET("/version", func(c *gin.Context) {
 		c.String(http.StatusOK, settings.Conf.Version)

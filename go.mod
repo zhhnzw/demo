@@ -6,6 +6,7 @@ require (
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
 	github.com/fsnotify/fsnotify v1.4.9
 	github.com/gin-contrib/cors v1.3.1
+	github.com/gin-contrib/pprof v1.3.0
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-openapi/spec v0.20.3 // indirect
 	github.com/go-redis/redis v6.15.9+incompatible
