@@ -24,7 +24,9 @@ func Setup(mode string) *gin.Engine {
 	config.AllowCredentials = true
 	r.Use(cors.New(config))
 	pprof.Register(r)
-	r.GET("/swagger/*any", gs.WrapHandler(swaggerFiles.Handler))
+	if mode == "debug" || mode == "dev" || mode == "test" {
+		r.GET("/swagger/*any", gs.WrapHandler(swaggerFiles.Handler))
+	}
 	r.GET("/version", func(c *gin.Context) {
 		c.String(http.StatusOK, settings.Conf.Version)
 	})
