@@ -2,6 +2,10 @@ package logger
 
 import (
 	"demo/settings"
+	"github.com/gin-gonic/gin"
+	"github.com/natefinch/lumberjack"
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 	"net"
 	"net/http"
 	"net/http/httputil"
@@ -9,11 +13,6 @@ import (
 	"runtime/debug"
 	"strings"
 	"time"
-
-	"github.com/gin-gonic/gin"
-	"github.com/natefinch/lumberjack"
-	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
 )
 
 // Init 初始化Logger
@@ -32,7 +31,7 @@ func Init(cfg *settings.LogConfig) (err error) {
 	}
 	core := zapcore.NewCore(encoder, writeSyncer, l)
 
-	lg := zap.New(core, zap.AddCaller())
+	lg := zap.New(core, zap.AddCaller()) // AddCaller 就是添加调用号行的日志
 	// 替换zap库中全局的logger
 	zap.ReplaceGlobals(lg)
 	return
@@ -48,12 +47,13 @@ func getEncoder() zapcore.Encoder {
 	return zapcore.NewJSONEncoder(encoderConfig)
 }
 
+// 日志切割
 func getLogWriter(filename string, maxSize, maxBackup, maxAge int) zapcore.WriteSyncer {
 	lumberJackLogger := &lumberjack.Logger{
 		Filename:   filename,
-		MaxSize:    maxSize,
-		MaxBackups: maxBackup,
-		MaxAge:     maxAge,
+		MaxSize:    maxSize,   // 日志文件超过这个大小就切割，单位：M
+		MaxBackups: maxBackup, // 保留日志文件的最大个数
+		MaxAge:     maxAge,    // 保留日志文件的最大天数
 	}
 	return zapcore.AddSync(lumberJackLogger)
 }

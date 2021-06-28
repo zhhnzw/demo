@@ -18,11 +18,10 @@ func Setup(mode string) *gin.Engine {
 		gin.SetMode(gin.ReleaseMode)
 	}
 	r := gin.New()
-	r.Use(logger.GinLogger(), logger.GinRecovery(true))
 	config := cors.DefaultConfig()
 	config.AllowOrigins = settings.Conf.AllowOrigins
 	config.AllowCredentials = true
-	r.Use(cors.New(config))
+	r.Use(logger.GinLogger(), logger.GinRecovery(true), cors.New(config))
 	pprof.Register(r)
 	if mode == "debug" || mode == "dev" || mode == "test" {
 		r.GET("/swagger/*any", gs.WrapHandler(swaggerFiles.Handler))
