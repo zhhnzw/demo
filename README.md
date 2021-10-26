@@ -4,6 +4,8 @@ go run main.go 成功执行后
 
 访问swagger接口文档：http://localhost:8000/swagger/index.html#/
 
+项目结构中: DAO 的含义是 Data Access Objects
+
 #### 压力测试
 
 1. 访问：http://127.0.0.1:8080/debug/pprof/
