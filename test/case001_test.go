@@ -1,4 +1,4 @@
-package suites
+package test
 
 import (
 	v1 "demo/controller/v1"
