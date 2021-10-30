@@ -21,7 +21,7 @@ COPY . .
 RUN export GOPROXY=https://goproxy.io && go build -o demo
 
 # 用于执行的镜像
-FROM alpine as runner
+FROM scratch as runner
 
 # 支持中文
 ENV LANF C.UTF-8
